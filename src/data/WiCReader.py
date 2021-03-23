@@ -8,7 +8,6 @@ from collections import defaultdict
 
 from src.utils.util import device
 from src.data.tokenize import tokenize_pet_txt, tokenize_pet_mlm_txt
-from src.data.tfidf import inv_freq
 
 class WiCReader(object):
     '''
