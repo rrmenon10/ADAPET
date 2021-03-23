@@ -1,6 +1,6 @@
 # ADAPET #
 
-This repository contains the official code for the paper: "Improving and Simplifying Pattern Exploiting Training" (link coming soon).
+This repository contains the official code for the paper: "[Improving and Simplifying Pattern Exploiting Training](https://arxiv.org/abs/2103.11955)".
 
 The model improves and simplifies [PET](https://arxiv.org/abs/2009.07118) with a decoupled label objective and label-conditioned MLM objective. 
 
@@ -58,3 +58,16 @@ The generated predictions can be found in `exp_out/fewglue/{task_name}/albert-xx
 ## Contact ##
 
 For any doubts or questions regarding the work, please contact Derek ([dtredsox@cs.unc.edu](mailto:dtredsox+adapet@cs.unc.edu)) or Rakesh ([rrmenon@cs.unc.edu](mailto:rrmenon+adapet@cs.unc.edu)). For any bug or issues with the code, feel free to open a GitHub issue or pull request.
+
+## Citation ##
+
+Please cite us if ADAPET is useful in your work:
+
+```
+@article={tam2021improving,
+          title={Improving and Simplifying Pattern Exploiting Training},
+          author={Tam, Derek and Menon, Rakesh R and Bansal, Mohit and Srivastava, Shashank and Raffel, Colin},
+          journal={arxiv preprint arXiv:2103.11955},
+          year={2021}
+}
+```
