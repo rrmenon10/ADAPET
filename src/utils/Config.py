@@ -2,7 +2,7 @@ import json
 import os
 import ast
 
-from src.utils.util import make_exp_dir, save_file
+from src.utils.util import make_exp_dir
 
 class Config(object):
     def __init__(self, filename=None, kwargs=None, mkdir=True):
