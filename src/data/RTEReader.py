@@ -160,7 +160,7 @@ class RTEReader(object):
                 if "[PREMISE]" in txt_split:
                     txt_trim = idx
 
-            orig_input_ids, masked_input_ids, mask_idx = tokenize_pet_mlm_txt(self.tokenizer, self.config, txt_split_tuple[0], txt_split_tuple[1], txt_split_tuple[2], txt_trim, self.set_stop_words_ids)
+            orig_input_ids, masked_input_ids, mask_idx = tokenize_pet_mlm_txt(self.tokenizer, self.config, txt_split_tuple[0], txt_split_tuple[1], txt_split_tuple[2], txt_trim)
             list_orig_input_ids.append(orig_input_ids)
             list_masked_input_ids.append(masked_input_ids)
 
@@ -202,7 +202,6 @@ class RTEReader(object):
                                                                                   txt_split_tuple[0],
                                                                                   txt_split_tuple[1],
                                                                                   txt_split_tuple[2], txt_trim,
-                                                                                  self.set_stop_words_ids,
                                                                                   mask_idx=mask_idx)
                 list_input_ids.append(orig_input_ids)
                 list_masked_input_ids.append(masked_input_ids)

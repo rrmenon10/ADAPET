@@ -31,7 +31,6 @@ class WiCReader(object):
         self._pet_names = ["PET{}".format(i+1) for i in range(self._num_pets)]
 
         self.list_true_lbl = []
-        self.set_stop_words_ids = set()
 
         self.dict_inv_freq = defaultdict(int)
         self.tot_doc = 0
