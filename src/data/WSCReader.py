@@ -111,7 +111,7 @@ class WSCReader(object):
                 words_text[pronoun_idx] = '*' + words_text[pronoun_idx] + '*'
                 text = ' '.join(words_text)
 
-                len_noun = max(len(self.tokenizer(masked_words_text[noun_idx], add_special_tokens=False)["input_ids"]), 1)
+                len_noun = max(len(self.tokenizer(words_text[noun_idx], add_special_tokens=False)["input_ids"]), 1)
                 len_pronoun = max(len(self.tokenizer(orig_text[pronoun_idx], add_special_tokens=False)["input_ids"]), 1)
 
                 dict_input = {"text": text, "pronoun": pronoun, "orig_text": orig_text,
