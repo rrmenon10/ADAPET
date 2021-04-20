@@ -55,6 +55,17 @@ sh bin/test.sh exp_out/fewglue/{task_name}/albert-xxlarge-v2/{timestamp}/
 ```
 The generated predictions can be found in `exp_out/fewglue/{task_name}/albert-xxlarge-v2/{timestamp}/test.json`.
 
+## Fine-tuned Models ##
+
+Our fine-tuned models can be found in this [link](https://drive.google.com/drive/folders/1pdVHI1Z6eRGs8OMklDCwXkPFK731yc_P?usp=sharing).
+
+To evaluate these fine-tuned models for different tasks, run the following command:
+```
+python src/run_pretrained.py -m {finetuned_model_dir}/{task_name} -c config/{task_name}.json -k pattern={best_pattern_for_task}
+```
+The scores can be found in `exp_out/fewglue/{task_name}/albert-xxlarge-v2/{timestamp}/dev_scores.json`.
+**Note**: The `best_pattern_for_task` can be found in Table 4 of the paper.
+
 ## Contact ##
 
 For any doubts or questions regarding the work, please contact Derek ([dtredsox@cs.unc.edu](mailto:dtredsox+adapet@cs.unc.edu)) or Rakesh ([rrmenon@cs.unc.edu](mailto:rrmenon+adapet@cs.unc.edu)). For any bug or issues with the code, feel free to open a GitHub issue or pull request.
