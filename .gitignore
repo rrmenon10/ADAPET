@@ -6,6 +6,9 @@ results/
 wandb/
 lib/
 output/
+adapet_models
+adapet_models/
+data
 data/
 pretrained_models
 pretrained_models/
