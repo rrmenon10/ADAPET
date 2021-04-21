@@ -128,7 +128,7 @@ class adapet(torch.nn.Module):
             masked_pet_rep_mask_ids_lbl_logit = pet_rep_mask_ids_lbl_logit * (lbl_ids>0).long()
 
         return masked_pet_rep_mask_ids_lbl_logit, lbl_ids, None
-    
+
 
     def get_decoupled_label_loss(self, batch):
         '''
@@ -151,7 +151,7 @@ class adapet(torch.nn.Module):
                 real_mask = lbl_logits > 0
 
             else:
-                # Removing tokens that are common across choices 
+                # Removing tokens that are common across choices
                 same_words_ids = torch.stack([reduce(lambda x, y: (x == y) * y, lbl_logit) for lbl_logit in lbl_logits],
                                              dim=0)
                 mask_same_words = (1 - (same_words_ids > 0).long()).repeat(1, lbl_logits.shape[1],
@@ -344,8 +344,7 @@ class adapet(torch.nn.Module):
         :return:
         '''
 
-        if "record" in self.config.dataset.lower():
-            pattern = "EVAL_{}".format(pattern)
+        pattern = "EVAL_{}".format(pattern)
 
         pet_mask_ids, mask_idx, list_lbl = self.dataset_reader.prepare_batch(batch, pattern)
 
