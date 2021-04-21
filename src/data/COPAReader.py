@@ -23,12 +23,12 @@ class COPAReader(object):
 
         self.list_true_lbl = []
 
-        self.pet_patterns_effect = [["[CHOICE1] or [CHOICE2] ?", " [PREMISE] ", ", so [MASK]. [SEP]"],
-                                    ["\" [CHOICE1] \" or ", "\" [CHOICE2] \"?",  " [PREMISE] so [MASK]. [SEP]"],
+        self.pet_patterns_effect = [["\" [CHOICE1] \" or \" [CHOICE2] \"?", " [PREMISE] ", ", so [MASK]. [SEP]"],
+                                    ["[CHOICE1] or [CHOICE2] ?", " [PREMISE] ", ", so [MASK]. [SEP]"],
                                     ["Because [PREMISE] ,",  " [MASK]. [SEP]", ""]]
 
-        self.pet_patterns_cause = [["[CHOICE1] or [CHOICE2] ?", " [PREMISE] ", "because [MASK]. [SEP]"],
-                                   ["\" [CHOICE1] \" or ", " \" [CHOICE2] \"?", " [PREMISE] because [MASK]. [SEP]"],
+        self.pet_patterns_cause = [["\" [CHOICE1] \" or \" [CHOICE2] \"?", " [PREMISE] ", "because [MASK]. [SEP]"],
+                                   ["[CHOICE1] or [CHOICE2] ?", " [PREMISE] ", "because [MASK]. [SEP]"],
                                    ["Because [MASK] ,", "  [PREMISE]. [SEP]", ""]]
 
         # Different lbl for each pattern
