@@ -159,25 +159,6 @@ class Scorer(object):
                     f1_pred_lbl.append(pred_lbl)
                     f1_true_lbl.append(true_lbl)
 
-        elif self.is_record and  "regular" in self.config.model.lower():
-            f1_pred_lbl = []
-            f1_true_lbl = []
-
-            for (idx, pred_true_lbl) in self.dict_idx2logits_lbl.items():
-
-                max_lbl_logit = -99999
-                max_pred_lbl = 0
-                max_true_lbl = 0
-
-                for (pred_lbl, true_lbl, lbl_logit) in pred_true_lbl:
-                    if lbl_logit > max_lbl_logit:
-                        max_pred_lbl = pred_lbl
-                        max_true_lbl = true_lbl
-                        max_lbl_logit = lbl_logit
-
-                f1_pred_lbl.append(max_pred_lbl)
-                f1_true_lbl.append(max_true_lbl)
-
         else:
             f1_pred_lbl = []
             f1_true_lbl = []
@@ -248,5 +229,7 @@ class Scorer(object):
 
     def get_logits(self):
         #TODO: Hack to deal with multi label token logits
-        return np.concatenate(self.list_logits, axis=0)
-        # return np.zeros((10, 100))
+        if self.is_record:
+            return np.zeros((10, 100))
+        else:
+            return np.concatenate(self.list_logits, axis=0)
