@@ -81,26 +81,6 @@ class Scorer(object):
 
                 acc_ttl_cnt += 1
 
-        elif self.is_record and  "regular" in self.config.model.lower():
-
-            for (idx, pred_true_lbl) in self.dict_idx2logits_lbl.items():
-
-                max_lbl_logit = -99999
-                is_correct = False
-
-                for (pred_lbl, true_lbl, lbl_logit) in pred_true_lbl:
-                    if lbl_logit > max_lbl_logit:
-                        if int(pred_lbl) == true_lbl:
-                            is_correct = True
-                        else:
-                            is_correct = False
-
-                        max_lbl_logit = lbl_logit
-
-                acc_ttl_cnt += 1
-                if is_correct:
-                    acc_cor_cnt += 1
-
         else:
             for (idx, pred_true_lbl) in self.dict_idx2logits_lbl.items():
                 pred_lbl = pred_true_lbl[0][0]
