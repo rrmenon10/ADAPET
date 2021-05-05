@@ -5,7 +5,7 @@ import numpy as np
 from transformers import *
 
 from src.data.Batcher import Batcher
-from src.utils.get_model import get_model
+from src.adapet import adapet
 from src.utils.Config import Config
 from src.eval.eval_model import dev_eval
 
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(config.pretrained_weight)
     batcher = Batcher(config, tokenizer, config.dataset)
     dataset_reader = batcher.get_dataset_reader()
-    model = get_model(config, tokenizer, dataset_reader)
+    model = adapet(config, tokenizer, dataset_reader).to(device)
 
     model.load_state_dict(torch.load(os.path.join(args.exp_dir, "cur_model.pt"))["model_state_dict"])
     dev_acc, dev_logits = dev_eval(config, model, batcher, 0)
