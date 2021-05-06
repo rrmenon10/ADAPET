@@ -21,9 +21,9 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(config.pretrained_weight)
     batcher = Batcher(config, tokenizer, config.dataset)
     dataset_reader = batcher.get_dataset_reader()
+    
     model = adapet(config, tokenizer, dataset_reader).to(device)
-
-    model.load_state_dict(torch.load(os.path.join(args.exp_dir, "cur_model.pt"))["model_state_dict"])
+    model.load_state_dict(torch.load(os.path.join(args.exp_dir, "best_model.pt")))
     dev_acc, dev_logits = dev_eval(config, model, batcher, 0)
 
     with open(os.path.join(config.exp_dir, "dev_logits.npy"), 'wb') as f:
