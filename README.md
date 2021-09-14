@@ -75,10 +75,10 @@ For any doubts or questions regarding the work, please contact Derek ([dtredsox@
 Please cite us if ADAPET is useful in your work:
 
 ```
-@article={tam2021improving,
+@inproceedings{tam2021improving,
           title={Improving and Simplifying Pattern Exploiting Training},
           author={Tam, Derek and Menon, Rakesh R and Bansal, Mohit and Srivastava, Shashank and Raffel, Colin},
-          journal={arxiv preprint arXiv:2103.11955},
+          journal={Empirical Methods in Natural Language Processing (EMNLP)},
           year={2021}
 }
 ```
