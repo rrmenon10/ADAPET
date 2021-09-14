@@ -62,7 +62,7 @@ def make_exp_dir(base_exp_dir):
 
     src_file = os.path.join(exp_dir_name, 'src')
 
-    copytree(os.path.join(os.environ['PET_ELECTRA_ROOT'], "src"), src_file,  ignore=ignore_patterns('*.pyc', 'tmp*'))
+    copytree(os.path.join(os.environ['ADAPET_ROOT'], "src"), src_file,  ignore=ignore_patterns('*.pyc', 'tmp*'))
 
     return exp_dir_name
 
