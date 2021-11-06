@@ -10,6 +10,10 @@ The model improves and simplifies [PET](https://arxiv.org/abs/2009.07118) with a
 <img src="img/ADAPET_update.png" width="400" height="300"/> <img src="img/LCMLM_update.png" width="420" height="300"/>
                        **Decoupled Label Loss                                                Label Conditioned Masked Language Modelling**
 
+## Updates ##
+
+- [November 2021] You can run ADAPET on your own dataset now! See instructions [here](#train-your-own-adapet)
+
 ## Setup ##
 
 Setup environment by running `source bin/init.sh`. This will 
@@ -54,6 +58,36 @@ To evaluate the model on the SuperGLUE test set, run the following command.
 sh bin/test.sh exp_out/fewglue/{task_name}/albert-xxlarge-v2/{timestamp}/
 ```
 The generated predictions can be found in `exp_out/fewglue/{task_name}/albert-xxlarge-v2/{timestamp}/test.json`.
+
+## Train your own ADAPET
+
+- Setup your dataset in the data folder as
+```
+data/{dataset_name}/
+    |
+    |__ train.jsonl
+    |__ val.jsonl
+    |__ test.jsonl
+```
+Each jsonl file consists of lines of dictionaries. Each dictionaries should have the following format:
+```
+{
+    "TEXT1": (insert text), 
+    "TEXT2": (insert text), 
+    "TEXT3": (insert text), 
+    ..., 
+    "TEXTN": (insert text), 
+    "LBL": (insert label)
+}
+```
+- Run the experiment
+```
+python cli.py --data_dir data/{dataset_name} \
+              --pattern '(INSERT PATTERN)' \
+              --dict_verbalizer '{"lbl_1": "verbalizer_1", "lbl_2": "verbalizer_2"}'
+```
+Here, `INSERT PATTERN` consists of `[TEXT1]`, `[TEXT2]`, `[TEXT3]`, ..., `[LBL]`.
+For example, if the new dataset had two text inputs and one label, a sample pattern would be `[TEXT1] and [TEXT2] imply [LBL]`.
 
 ## Fine-tuned Models ##
 
