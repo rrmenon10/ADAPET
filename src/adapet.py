@@ -30,7 +30,8 @@ class adapet(torch.nn.Module):
             albert_config = AlbertConfig.from_pretrained(pretrained_file)
             self.model = AlbertForMaskedLM.from_pretrained(pretrained_file, config=albert_config)
         else:
-            raise ValueError("Invalid model")
+            self.model = AutoModelForMaskedLM.from_pretrained(pretrained_file)
+
 
         self.num_lbl = self.dataset_reader.get_num_lbl()
 
@@ -45,11 +46,11 @@ class adapet(torch.nn.Module):
 
         # Setup patterns depending on if random or not
         self.pattern_list = self.dataset_reader.dataset_reader.pets
-        if config.pattern == "random":
+        if config.pattern_idx == "random":
             self.pattern = lambda: random.choice(self.pattern_list)
         else:
-            assert config.pattern > 0 and config.pattern <= len(self.pattern_list), "This dataset has {} patterns".format(len(self.pattern_list))
-            self.pattern = self.pattern_list[config.pattern-1]
+            assert config.pattern_idx > 0 and config.pattern_idx <= len(self.pattern_list), "This dataset has {} patterns".format(len(self.pattern_list))
+            self.pattern = self.pattern_list[config.pattern_idx-1]
 
     def get_single_logits(self,  pet_mask_ids, mask_idx, list_lbl):
         '''
@@ -367,7 +368,7 @@ class adapet(torch.nn.Module):
         :return:
         '''
 
-        if self.config.pattern == "random":
+        if self.config.pattern_idx == "random":
             list_lbl_logits = []
             for pattern in self.pattern_list:
                 lbl_pred, lbl_logits = self.predict_helper(batch, pattern)

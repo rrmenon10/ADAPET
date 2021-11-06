@@ -9,6 +9,7 @@ from src.data.WiCReader import WiCReader
 from src.data.COPAReader import COPAReader
 from src.data.RecordReader import RecordReader
 from src.data.WSCReader import WSCReader
+from src.data.GenericReader import GenericReader
 
 class DatasetReader(object):
     '''
@@ -39,6 +40,8 @@ class DatasetReader(object):
             self.dataset_reader = RecordReader(self.config, tokenizer)
         elif self.dataset.lower() == "fewglue/wsc":
             self.dataset_reader = WSCReader(self.config, tokenizer)
+        elif self.dataset.lower() == "generic":
+            self.dataset_reader = GenericReader(self.config, tokenizer)
         else:
             raise ValueError("Invalid Dataset name")
 

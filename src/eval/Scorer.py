@@ -56,6 +56,8 @@ class Scorer(object):
         elif dataset.lower() == "fewglue/wsc":
             self.compute_acc = True
             self.is_wsc = True
+        elif dataset.lower() == "generic":
+            self.compute_acc = True
         else:
             raise ValueError("Invalid Dataset name")
 

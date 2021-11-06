@@ -14,7 +14,7 @@ class Config(object):
 
         # Model and pattern parameters
         self.pretrained_weight = "bert-base-uncased"
-        self.pattern = "random"
+        self.pattern_idx = "random"
 
         # Duration of training parameters
         self.batch_size = 8
@@ -40,6 +40,12 @@ class Config(object):
         self.grad_clip_norm = 1
         self.warmup_ratio = 0
 
+        # Generic dataset hyperparameters
+        self.pattern = "[TEXT1] and [TEXT2] "
+        self.idx_txt_trim = -1 # Indexed from 1
+        self.dict_verbalizer = {"True": "Yes", "False": "No"}
+        self.data_dir = "data/fewglue/BoolQ"
+
         if filename:
             self.__dict__.update(json.load(open(filename)))
         if kwargs:
@@ -52,7 +58,7 @@ class Config(object):
         for (k, v) in kwargs.items():
             try:
                 v = ast.literal_eval(v)
-            except ValueError:
+            except:
                 v = v
             setattr(self, k, v)
 
