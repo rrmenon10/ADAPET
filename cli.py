@@ -31,6 +31,8 @@ if __name__ == '__main__':
     # ADAPET hyperparameters
     parser.add_argument('--pattern_idx', default=1, help="Pattern index among all patterns available; For SuperGLUE, can use numbers >1 depending on dataset. For a new dataset, please set this to 1.")
     parser.add_argument('--mask_alpha', type=float, default=0.105, help='masking ratio for the label conditioning loss')
+    parser.add_argument('--idx_txt_trim', type=int, default=1, help="TXT_ID of the text that can be trimmed (usually the longer text). Eg. if TXT1 needs to be trimmed, set this to 1.")
+    parser.add_argument('--max_num_lbl_tok', type=int, default=1, help="The maximum number of tokens per label for the verbalizer. It will raise an error if the tokenizer tokenizes a label into more than 'max_num_lbl_tok' tokens.")
 
     # Replicating SuperGLUE results
     parser.add_argument('-c', '--config', type=str, default=None, help='Use this for replicating SuperGLUE results.')
