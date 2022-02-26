@@ -21,6 +21,7 @@ class GenericReader(object):
 
         self.num_lbl = len(self.config.dict_verbalizer)
 
+        self.config.pattern += f" {self.tokenizer.sep_token}"
         self.check_pattern(self.config.pattern)
 
         txt_idx_trim = "[TEXT%d]" % self.config.idx_txt_trim
@@ -165,8 +166,7 @@ class GenericReader(object):
         bs = len(batch["input"]["TEXT1"])
 
         list_input_ids = []
-        list_mask_idx = np.ones((bs, self.num_lbl, self.get_num_lbl_tok())) * self.config.max_text_length
-
+        list_mask_idx = np.ones((bs, self.num_lbl, self.get_num_lbl_tok())) * self.config.max_text_length - 1
         txt_trim = 1
 
         for b_idx in range(bs):
@@ -175,7 +175,7 @@ class GenericReader(object):
             for idx, txt_split in enumerate(self.pattern):
                 for i in range(1, self.text_ctr):
                     txt_split = txt_split.replace("[TEXT%d]" % i, list_list_txt[i - 1][b_idx])
-                txt_split = txt_split.replace("[LBL]", self.tokenizer.mask_token)
+                txt_split = txt_split.replace("[LBL]", self.tokenizer.mask_token * self.get_num_lbl_tok())
                 mask_txt_split_tuple.append(txt_split)
 
             input_ids, mask_idx = tokenize_pet_txt(self.tokenizer, self.config, mask_txt_split_tuple[0],
@@ -197,7 +197,7 @@ class GenericReader(object):
         for i in range(bs):
             list_label.append(self.label)
 
-        return torch.tensor(list_input_ids).to(device), torch.tensor(list_mask_idx).to(device), list_label
+        return torch.tensor(list_input_ids).to(device), torch.tensor(list_mask_idx).to(device).long(), list_label
 
     def prepare_pet_mlm_batch(self, batch, mode="PET1"):
 

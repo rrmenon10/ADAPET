@@ -247,6 +247,8 @@ class adapet(torch.nn.Module):
         list_lbl = batch_list_lbl[0]
         mask_idx = batch_mask_idx[0]
 
+        if self.config.dataset.lower() == "generic": pet_mask_ids = pet_mask_ids.repeat(len(list_lbl), 1)
+
         for idx, lbl in enumerate(list_lbl):
             lbl_ids = self.tokenizer(lbl, add_special_tokens=False)["input_ids"]
             log_probabilities = []
@@ -272,7 +274,10 @@ class adapet(torch.nn.Module):
 
                 log_probabilities.append(math.log(max_prob))
                 pet_mask_ids[idx][mask_pos] = masked_id
-                tok_pos = mask_idx[idx].index(mask_pos)
+                if isinstance(mask_pos, list):
+                    tok_pos = mask_idx[idx].index(mask_pos)
+                else:
+                    tok_pos = torch.min(torch.nonzero(mask_idx[idx] == mask_pos)[0])
                 lbl_ids[tok_pos] = -100
 
             log_probs.append(sum(log_probabilities))
