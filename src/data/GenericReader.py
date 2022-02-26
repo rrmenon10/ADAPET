@@ -68,7 +68,7 @@ class GenericReader(object):
         return file
 
     def get_num_lbl_tok(self):
-        return self.config.max_num_lbl
+        return self.config.max_num_lbl_tok
 
     def read_dataset(self, split=None, is_eval=None):
         '''
@@ -125,7 +125,6 @@ class GenericReader(object):
 
     def get_lbl_num_lbl_tok(self, lbl):
         num_lbl_tok = len(self.tokenizer(lbl, add_special_tokens=False)["input_ids"])
-        #
         return min(num_lbl_tok, self.get_num_lbl_tok())
 
     def prepare_pet_batch_single_token_label(self, batch, list_list_txt):
