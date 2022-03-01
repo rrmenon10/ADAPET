@@ -31,6 +31,8 @@ class GenericReader(object):
 
         self.label = list(self.config.dict_verbalizer.values())
 
+        self.list_true_lbl = []
+
     def check_pattern(self, pattern):
 
         # Get maximum number of text
@@ -239,3 +241,24 @@ class GenericReader(object):
 
     def prepare_eval_pet_batch(self, batch, mode="PET1"):
         return self.prepare_pet_batch(batch, mode)
+
+    def store_test_lbl(self, list_idx, pred_lbl, true_lbl, logits):
+        self.list_true_lbl.append(pred_lbl)
+
+    def flush_file(self, write_file):
+        self.list_true_lbl = torch.cat(self.list_true_lbl, dim=0).cpu().int().numpy().tolist()
+
+        read_file = self._get_file("test")
+
+        reverse_dict = {idx: lbl for idx, lbl in enumerate(self.config.dict_verbalizer.keys())}
+
+        with open(read_file, 'r') as f_in:
+            for ctr, line in enumerate(f_in.readlines()):
+                answer_dict = {}
+                answer_dict["idx"] = ctr
+                pred_lbl = self.list_true_lbl[ctr]
+
+                answer = reverse_dict[pred_lbl]
+                answer_dict["label"] = answer
+
+                write_file.write(json.dumps(answer_dict) + "\n")
