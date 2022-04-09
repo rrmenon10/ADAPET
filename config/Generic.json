@@ -3,7 +3,7 @@
     "dataset": "generic",
     "idx_txt_trim": 1,
     "max_text_length": 64,
-    "pattern_idx_idx": 1,
+    "pattern_idx": 1,
     "batch_size": 1,
     "eval_batch_size": 1,
     "num_batches": 1000,
