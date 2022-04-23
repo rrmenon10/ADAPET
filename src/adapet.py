@@ -274,7 +274,7 @@ class adapet(torch.nn.Module):
 
                 log_probabilities.append(math.log(max_prob))
                 pet_mask_ids[idx][mask_pos] = masked_id
-                if isinstance(mask_pos, list):
+                if isinstance(mask_idx, list):
                     tok_pos = mask_idx[idx].index(mask_pos)
                 else:
                     tok_pos = torch.min(torch.nonzero(mask_idx[idx] == mask_pos)[0])
